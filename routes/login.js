@@ -6,6 +6,7 @@ const jwt = require( 'jsonwebtoken' );
 const router = express.Router();
 
 const { OAuth2Client } = require('google-auth-library');
+
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const saltRounds = 10;
@@ -31,14 +32,14 @@ router.post( '/', ( req, res ) => {
         if ( !userDB ) {
             return res.status( 400 ).json({
                 ok: false,
-                message: 'Incorrect credentials',
+                message: 'Incorrect credentials - name',
                 errors: err
             });
         }
         if ( !bcrypt.compareSync( body.password, userDB.password )) {
             return res.status( 400 ).json({
                 ok: false,
-                message: 'Incorrect credentials',
+                message: 'Incorrect credentials - password',
                 errors: err
             });
         }
@@ -84,7 +85,7 @@ async function verify( token ) {
 // ==========================================================
 //    POST LOGIN GOOGLE PAGE
 // ==========================================================
-app.post( '/google', async ( req, res ) => {
+router.post( '/google', async ( req, res ) => {
 
 
     const token = req.body.idtoken;

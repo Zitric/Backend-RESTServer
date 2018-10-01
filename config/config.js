@@ -29,8 +29,8 @@ process.env.SEED = process.env.SEED ||
 //    DATA BASE
 // ==========================================================
 process.env.URLDB = process.env.NODE_ENV === 'dev' ?
-    'mongodb://localhost:27017/testDB' :
-    process.env.MONGO_URL_TEST;
+    'mongodb://localhost:27017/RESTServerDB' :
+    process.env.MONGO_URL_RESTSERVER;
 
 
 // ==========================================================
