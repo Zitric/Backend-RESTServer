@@ -122,7 +122,7 @@ router.delete( '/:id', [ verifyToken, verifyAdminRole ], ( req, res ) => {
                 errors: err
             });
         }
-        if ( !userDB ) {
+        if ( !deletedUser ) {
             return res.status( 400 ).json({
                 ok: false,
                 message: 'The user with the id ' + id + ' does not exist',
