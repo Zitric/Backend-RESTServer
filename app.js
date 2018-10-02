@@ -13,7 +13,7 @@ const bodyParser = require( 'body-parser' );
 const indexRouter = require('./routes/index' );
 const loginRouter = require('./routes/login' );
 const usersRouter = require('./routes/users' );
-const categoryRouter = require('./routes/category' );
+const recipeRouter = require('./routes/recipe' );
 
 
 const app = express();
@@ -35,7 +35,7 @@ app.use( express.static( path.join( __dirname, 'public' )));
 app.use( '/', indexRouter );
 app.use( '/login', loginRouter );
 app.use( '/users', usersRouter );
-app.use( '/category', categoryRouter );
+app.use( '/recipes', recipeRouter );
 
 // parse application/x-www-form-urlencoded
 app.use( bodyParser.urlencoded( { extended: false }) );
