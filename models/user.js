@@ -21,6 +21,10 @@ const userSchema = new Schema({
         type: String,
         required: [ true, 'The password is required' ]
     },
+    creationDate: {
+        type: Date,
+        required: [ true, 'the creationTime is required' ]
+    },
     img: {
         type: String,
         required: false

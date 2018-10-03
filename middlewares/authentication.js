@@ -26,7 +26,7 @@ const verifyToken = ( ( req, res, next ) => {
 // ==========================================================
 //    VERIFY ADMIN ROLE
 // ==========================================================
-const verifyAdminRole = ( req, res, next ) => {
+const verifyAdminRole = (( req, res, next ) => {
 
     const user = req.user;
 
@@ -39,7 +39,7 @@ const verifyAdminRole = ( req, res, next ) => {
         });
     }
     next();
-};
+});
 
 
 

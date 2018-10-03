@@ -50,9 +50,12 @@ router.post( '/', [ verifyToken, verifyAdminRole ], ( req, res ) => {
 
     const body = req.body;
 
+    const date = new Date();
+
     const user = new User({
         name: body.name,
         email: body.email,
+        creationDate: date,
         password: bcrypt.hashSync ( body.password, saltRounds ),
         role: body.role
     });
