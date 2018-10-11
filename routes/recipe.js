@@ -19,8 +19,7 @@ router.get( '/', verifyToken, ( req, res, next ) => {
         .sort('name')
         //.populate('ingredient')
         .populate('user', 'name email') // to show the data of the linked users
-        .exec(
-            ( err, recipes ) => {
+        .exec(( err, recipes ) => {
 
                 if( err ) {
                     return res.status( 500 ).json({
@@ -47,7 +46,7 @@ router.get( '/:id', verifyToken, ( req, res, next ) => {
 
     const id = req.params.id;
 
-    Recipe.findById( id, ( err, recipeBD ) => {
+    Recipe.findById( id, ( err, recipeDB ) => {
 
         if ( err ) {
             return res.status( 500 ).json({
@@ -56,13 +55,47 @@ router.get( '/:id', verifyToken, ( req, res, next ) => {
                 errors: err
             });
         }
+        if ( !recipeDB ) {
+            return res.status( 400 ).json({
+                ok: false,
+                err: {
+                    message: 'The recipe with the id ' + id + ' does not exist'
+                }
+            });
+        }
         res.json({
             ok: true,
-            recipe: recipeBD
+            recipe: recipeDB
         });
     });
 });
 
+// ==========================================================
+//    SEARCH RECIPE
+// ==========================================================
+router.get('/recipes/search/:word', verifyToken, ( req, res ) => {
+
+    const word = req.params.word;
+
+    const regex = new RegExp( word, 'i');
+
+    Recipe.find({ name : regex })
+        .exec(( err, recipesDB ) => {
+
+            if ( err ) {
+                return res.status( 500 ).json({
+                    ok: false,
+                    message: 'Error getting a recipe from the data base',
+                    errors: err
+                });
+            }
+            res.json({
+                ok: true,
+                recipes: recipesDB
+            });
+    });
+
+});
 
 // ==========================================================
 //    CREATE RECIPE
