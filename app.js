@@ -45,7 +45,8 @@ app.use( bodyParser.json() );
 
 
 // Connection to database
-mongoose.connection.openUri( process.env.URLDB,  ( err, res ) => {
+mongoose.connection.openUri( process.env.URLDB, { useNewUrlParser: true },
+    ( err, res ) => {
     if ( err ) {
         throw err;
     } else {
